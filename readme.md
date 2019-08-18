@@ -31,3 +31,22 @@ foreach($stream->start() as $lines){ // $lines is now array of line objects with
 }
 
 ```
+
+## Tests
+During testing i have created dummy file (10000 lines) that you can use for testing and script in /tests <br/>
+Here are results:<br/>
+Chunk size 10000 (all lines allocated in memory in one call):<br/>
+Line number: 1     Memory usage: 11.183MB<br/>
+Line number: 1000  Memory usage: 11.183MB<br/>
+Line number: 2000  Memory usage: 11.183MB<br/>
+Line number: 5000  Memory usage: 11.183MB<br/>
+Line number: 7000  Memory usage: 11.183MB<br/>
+Line number: 10000 Memory usage: 11.183MB<br/>
+<br/>
+Chunk size 10:<br/>
+Line number: 1     Memory usage: 415.781KB<br/>
+Line number: 1000  Memory usage: 415.820KB<br/>
+Line number: 2000  Memory usage: 415.820KB<br/>
+Line number: 5000  Memory usage: 415.820KB<br/>
+Line number: 7000  Memory usage: 415.820KB<br/>
+Line number: 10000 Memory usage: 415.820KB<br/>

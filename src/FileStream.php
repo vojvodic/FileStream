@@ -19,6 +19,12 @@ class FileStream
     public $chunkSize = 1;
 
     /**
+     * Memory units
+     * @var [array]
+     */
+    private $memoryUnits = ['B', 'KB', 'MB', 'GB'];
+
+    /**
      * @method __construct
      * @param  [string]      $input_file_path
      */
@@ -41,6 +47,19 @@ class FileStream
         }
         $this->inputFilePath = $file_path;
         return true;
+    }
+
+    /**
+     * Return human readable memory usage
+     * @method getMemoryUsage
+     * @var    $bytes [integer]
+     * @return [string]
+     */
+    public function getMemoryUsage($bytes = 0)
+    {
+        $bytes = $bytes !== 0 ?  $bytes : memory_get_usage();
+        $power = $bytes > 0 ? floor( log($bytes, 1024) ) : 0;
+        return number_format($bytes / pow(1024, $power), 3, '.', ',') . $this->memoryUnits[$power];
     }
 
     /**
