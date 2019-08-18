@@ -1,6 +1,6 @@
 # FileStream (local files) chunk by chunk
 
-Small class that can read large files in PHP (1GB, 5GB,20GB, 50GB) chunk by chunk
+Small class that can read large files in PHP (1GB, 5GB,20GB, 50GB) chunk by chunk.<br/>
 If you are reading large files with size over 1GB,10GB, ...  well we can't allocate them into memory at once but we can read them chunk by chunk (line by line or by 10000 lines).  
 
 ## Examples
