@@ -31,14 +31,14 @@ class FileStream
     private $handle;
 
     /**
-     * If true stream read in bytes otherwise in file lines
+     * If true stream in bytes otherwise in file lines
      * @var [bool] $usingBytes
      */
     public $usingBytes = true;
 
     /**
      * How many chunks to stream in one call
-     * If using $usingBytes is true then chunkSize is bytes length otherwise it represents number of lines
+     * If $usingBytes is true then chunkSize is bytes length otherwise it represents number of lines
      * @var [integer] $chunkSize
      */
     public $chunkSize = 1024;
@@ -61,7 +61,7 @@ class FileStream
     }
 
     /**
-     * Set End reading file from bytes
+     * Set input file
      * @method setInputFile
      * @var    [string]    $file_path
      * @return [bool]
