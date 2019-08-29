@@ -1,26 +1,40 @@
 # FileStream (local files) chunk by chunk
 
-Small class that can read large files in PHP (1GB, 5GB,20GB, 50GB) chunk by chunk.<br/>
-If you are reading large files with size over 1GB,10GB, ...  well we can't allocate them into memory at once but we can read them chunk by chunk (line by line or by 10000 lines).  
+PHP class that can read large files (1GB, 5GB,20GB, 50GB) chunk by chunk.<br/>
+If you are reading large files with size over 1GB,10GB, ...  well we can't allocate them into memory at once but we can read them chunk by chunk (line by line or by 10000 lines or by bytes length).
 
 ## Examples
-Read file line by line where chunk size is one line.
+Read file using bytes where chunk size is bytes length
 ```
-$stream = new FileStream( $input_file_path ); // String
+$stream = new FileStream( $input_file_path ); // String - path to file
+$stream->chunkSize = 1024; // How many bytes to allocate in one call
 
-foreach($stream->start() as $line){ $line is object representing line content and number
+foreach($stream->start() as $buffer){
 
-  echo $line->number . " : " . $line->content . "\n";
+  echo $buffer;
 
 }
 
 ```
 
-Chunk size can be set by caller.
-This allows you to allocate more lines into memory in one call - useful for processing milions of lines where you can't allocate 50 milion lines into memory but you can based on your machine 1 milion or more and script will execute faster.
+Read file line by line where chunk size is one line.
 ```
-$stream = new FileStream( $input_file_path ); // String
-$stream->chunkSize = 50000; // Integer
+$stream = new FileStream( $input_file_path );
+$stream->usingBytes = false; // Stream in lines
+
+foreach($stream->start() as $line){ $line is object representing line content and number
+
+  echo $line->number . " : " . $line->content . "\n";
+  echo $stream->getMemoryUsage() . "\n";
+}
+
+```
+
+Read file using lines and allocate more lines in one call
+```
+$stream = new FileStream( $input_file_path );
+$stream->chunkSize = 50000; // Integer - How many lines to allocate in one call
+$stream->usingBytes = false; // Stream in lines
 
 foreach($stream->start() as $lines){ // $lines is now array of line objects with array size the same as chunk size
 
